@@ -1,4 +1,4 @@
-const User = require('../module/User.js')
+const User = require('../src/module/User')
 const expect = require('chai').expect
 
 describe('User module', () => {
