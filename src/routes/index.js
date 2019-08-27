@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const {user, location} = require('../queries')
 
 const api = Router();
 
@@ -21,9 +22,14 @@ api.get('/', (req, res) => {
     res.status(200).send({status: 'API Works'});
 });
 
-api.post('/location', (req, res) => {
+api.post('/location', async (req, res) => {
     const { body } = req;
-    res.status(200).send({location: getLocation(body.location)});
+    const resp = await location.addLocation(body);
+    res.status(200).send({location: resp});
 });
+
+api.get('/getlocations', async (req, res) => {
+    res.status(200).send({location: location.getlocation()})
+})
 
 module.exports = api;
