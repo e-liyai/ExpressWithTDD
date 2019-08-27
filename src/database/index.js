@@ -1,8 +1,12 @@
-const knex = require('knex');
+const Sequelize = require('sequelize');
 
-const pg = knex({
-    client: 'pg',
-    connection: process.env.DB_URL
-});
-
-module.exports = pg
+const sequelize = new Sequelize('tddtest', process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.HOST,
+    dialect: 'mysql',
+    pool: {
+      max: 10,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
+  })
