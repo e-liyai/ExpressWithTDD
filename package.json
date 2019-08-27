@@ -4,7 +4,7 @@
   "description": "tdd approach",
   "main": "index.js",
   "scripts": {
-    "test": "mocha lib/**/**.spec.js"
+    "test": "mocha tests/**/**.spec.js"
   },
   "repository": {
     "type": "git",
