@@ -18,7 +18,7 @@ describe('test endpoint', () => {
             .post('/api/v1/location')
             .send({location: 'nairobi'})
             .end((req, res) => {
-                expect(res.body.location).to.equal(Object);
+                expect(res.body.location).to.equal('Land of cold waters');
                 done();
             })
     })
