@@ -1,12 +1,20 @@
 const Sequelize = require('sequelize');
+const config = require('../config/config');
+const User = require('../module/User');
+const location = require('../module/location');
 
-const sequelize = new Sequelize('tddtest', process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.HOST,
-    dialect: 'mysql',
-    pool: {
-      max: 10,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  })
+const sequelize = new Sequelize(config[process.env.ENV]);
+
+const UserModel = User(sequelize, Sequelize);
+const LocationModel = location(sequelize, Sequelize);
+UserModel.belongsTo(LocationModel);
+
+sequelize.sync({ force: true })
+  .then(() => {
+    console.log(`Database & tables created!`)
+  });
+
+  module.exports = {
+      UserModel,
+      LocationModel
+  } 
